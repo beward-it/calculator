@@ -2,6 +2,7 @@ import sympy
 from pyglet import shapes as sh
 import pyglet
 from pyglet.text import Label
+from pyglet.window.key import *
 wind = pyglet.window.Window(width=560, height=820)
 buttons = pyglet.graphics.Batch()
 numbers = pyglet.graphics.Batch()
@@ -96,10 +97,34 @@ def on_mouse_press(x, y, symbol, modifiers):
             solve = result.text
         elif 420 < x:
             symb = "-"
-
-
     result.text += symb
     solve += symb
+
+
+@wind.event
+def on_key_press(symbol, modifiers):
+    global solve
+    symb = ""
+    try:
+        if symbol in range(65456, 65467):
+            symb = str(symbol - 65456)
+        else:
+            raise BaseException("HiHi")
+    except:
+            if symbol == NUM_ADD:
+                symb = "+"
+            elif symbol == NUM_SUBTRACT:
+                symb = "-"
+            elif symbol == NUM_MULTIPLY:
+                symb = "*"
+            elif symbol == NUM_DIVIDE:
+                symb = "/"
+            elif symbol == NUM_DECIMAL:
+                symb = "."
+    result.text += symb
+    solve += symb
+
+
 @wind.event
 def on_draw():
     wind.clear()
