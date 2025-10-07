@@ -36,7 +36,7 @@ def on_mouse_press(x, y, symbol, modifiers):
     global solve
     global isScobka
     symb = ""
-    if 0 < y < 140:
+    if 0 < y < 130:
         if 0 < x < 140:
             if isScobka:
                 symb = ")"
@@ -49,11 +49,60 @@ def on_mouse_press(x, y, symbol, modifiers):
         elif 280 < x < 420:
             symb = "."
         elif 420 < x:
-            res = 
+            #try:
+                result.text = str(int(sympy.sympify(solve).evalf()))
+                solve = result.text
+            #except Exception as e:
+                #print(e)
+                #result.text = "Error"
+    elif 130 < y < 260:
+        if 0 < x < 140:
+            symb = "7"
+        elif 140 < x < 280:
+            symb = "8"
+        elif 280 < x < 420:
+            symb = "9"
+        elif 420 < x:
+            symb = "/"
+    elif 260 < y < 390:
+        if 0 < x < 140:
+            symb = "4"
+        elif 140 < x < 280:
+            symb = "5"
+        elif 280 < x < 420:
+            symb = "6"
+        elif 420 < x:
+            symb = "*"
+    elif 390 < y < 520:
+        if 0 < x < 140:
+            symb = "1"
+        elif 140 < x < 280:
+            symb = "2"
+        elif 280 < x < 420:
+            symb = "3"
+        elif 420 < x:
+            symb = "+"
+    elif 520 < y < 650:
+        if 0 < x < 140:
+            result.text = ""
+            solve = ""
+        elif 140 < x < 280:
+            symb = "**"
+        elif 280 < x < 420:
+            res = ""
+            for i in range(len(solve) - 1):
+                res += solve[i]
+            result.text = res
+            solve = result.text
+        elif 420 < x:
+            symb = "-"
+
+
     result.text += symb
     solve += symb
 @wind.event
 def on_draw():
+    wind.clear()
     buttons.draw()
     numbers.draw()
 pyglet.app.run()
