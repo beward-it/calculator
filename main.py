@@ -50,12 +50,12 @@ def on_mouse_press(x, y, symbol, modifiers):
         elif 280 < x < 420:
             symb = "."
         elif 420 < x:
-            #try:
-                result.text = str(int(sympy.sympify(solve).evalf()))
+            try:
+                result.text = str(float(sympy.sympify(solve).evalf()))
                 solve = result.text
-            #except Exception as e:
-                #print(e)
-                #result.text = "Error"
+            except Exception as e:
+                print(e)
+                result.text = "Error"
     elif 130 < y < 260:
         if 0 < x < 140:
             symb = "7"
